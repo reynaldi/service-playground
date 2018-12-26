@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Api", "src\Playground.Api\Playground.Api.csproj", "{C7027168-4B97-40A8-833D-DDE1C69B6D1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground.Api", "src\Playground.Api\Playground.Api.csproj", "{C7027168-4B97-40A8-833D-DDE1C69B6D1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C705B400-C7EB-4B06-BACE-3128B740F273}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B9EA06C9-501E-447A-8112-241DF78CEE6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Api.Test", "test\Playground.Api.Test\Playground.Api.Test.csproj", "{A14F2272-B9EA-479C-83BB-0BDEC6B5CD5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Auth", "src\Playground.Auth\Playground.Auth.csproj", "{760AE100-92DA-4165-A08A-6A996A8486A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Core", "Playground.Core\Playground.Core.csproj", "{ED03BF32-7C1D-4DA8-A3DC-09F55BB0755C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,27 @@ Global
 		{C7027168-4B97-40A8-833D-DDE1C69B6D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7027168-4B97-40A8-833D-DDE1C69B6D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7027168-4B97-40A8-833D-DDE1C69B6D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14F2272-B9EA-479C-83BB-0BDEC6B5CD5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14F2272-B9EA-479C-83BB-0BDEC6B5CD5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14F2272-B9EA-479C-83BB-0BDEC6B5CD5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14F2272-B9EA-479C-83BB-0BDEC6B5CD5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760AE100-92DA-4165-A08A-6A996A8486A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760AE100-92DA-4165-A08A-6A996A8486A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760AE100-92DA-4165-A08A-6A996A8486A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760AE100-92DA-4165-A08A-6A996A8486A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED03BF32-7C1D-4DA8-A3DC-09F55BB0755C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED03BF32-7C1D-4DA8-A3DC-09F55BB0755C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED03BF32-7C1D-4DA8-A3DC-09F55BB0755C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED03BF32-7C1D-4DA8-A3DC-09F55BB0755C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C7027168-4B97-40A8-833D-DDE1C69B6D1E} = {C705B400-C7EB-4B06-BACE-3128B740F273}
+		{A14F2272-B9EA-479C-83BB-0BDEC6B5CD5E} = {B9EA06C9-501E-447A-8112-241DF78CEE6A}
+		{760AE100-92DA-4165-A08A-6A996A8486A5} = {C705B400-C7EB-4B06-BACE-3128B740F273}
+		{ED03BF32-7C1D-4DA8-A3DC-09F55BB0755C} = {C705B400-C7EB-4B06-BACE-3128B740F273}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0681D3D8-E646-4C77-A764-511920B524B5}
