@@ -3,9 +3,11 @@ using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Playground.Auth.Domain;
 
 namespace Playground.Auth
 {
@@ -21,7 +23,23 @@ namespace Playground.Auth
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PlaygroundIdentityContext>(options => 
+                options.UseNpgsql(Configuration.GetConnectionString("PlaygroundIdentityDb"), sql => sql.MigrationsAssembly("Playground.Auth")));
+
+            services.AddIdentity<AuthUser, IdentityRole>(options => 
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
+            })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<PlaygroundIdentityContext>()
+            .AddDefaultTokenProviders();
+
             services.AddIdentityServer()
+                .AddAspNetIdentity<PlaygroundIdentityContext>()
                 .AddDeveloperSigningCredential()
                 .AddConfigurationStore(opt => 
                 {
@@ -44,6 +62,7 @@ namespace Playground.Auth
             {
                 var persistedGrant = serviceScope.ServiceProvider.GetService<PersistedGrantDbContext>();
                 var configurationDb = serviceScope.ServiceProvider.GetService<ConfigurationDbContext>();
+                var identityContext = serviceScope.ServiceProvider.GetService<PlaygroundIdentityContext>();
                 if (persistedGrant.Database.GetPendingMigrations().Any())
                 {
                     persistedGrant.Database.Migrate();
@@ -51,6 +70,10 @@ namespace Playground.Auth
                 if (configurationDb.Database.GetPendingMigrations().Any())
                 {
                     configurationDb.Database.Migrate();
+                }
+                if (identityContext.Database.GetPendingMigrations().Any())
+                {
+                    identityContext.Database.Migrate();
                 }
             }
 
