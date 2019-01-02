@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Playground.Auth.Domain;
+using Playground.Core.Exceptions;
 
 namespace Playground.Auth
 {
@@ -52,7 +54,7 @@ namespace Playground.Auth
                     opt.EnableTokenCleanup = true;
                     opt.TokenCleanupInterval = 30;
                 });
-            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,13 +83,14 @@ namespace Playground.Auth
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseIdentityServer();
-
-            app.Run(async (context) =>
+            else
             {
-                await context.Response.WriteAsync("Hello World!");
-            });
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            app.ConfigureExceptionHandler();
+            app.UseIdentityServer();
+            app.UseMvc();            
         }
     }
 }
